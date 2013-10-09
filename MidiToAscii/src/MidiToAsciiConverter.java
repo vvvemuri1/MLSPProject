@@ -8,7 +8,7 @@ import javax.sound.midi.MidiUnavailableException;
 import javax.sound.midi.Sequence;
 import javax.sound.midi.Track;
 
-import org.jfugue.Note;
+import org.jfugue.MusicStringParser;
 import org.jfugue.Pattern;
 import org.jfugue.Player;
 
