@@ -8,21 +8,44 @@ import javax.sound.midi.MidiUnavailableException;
 import javax.sound.midi.Sequence;
 import javax.sound.midi.Track;
 
-import org.jfugue.MusicStringParser;
+import org.jfugue.DurationPatternTool;
+import org.jfugue.MidiParser;
 import org.jfugue.Pattern;
 import org.jfugue.Player;
 
 public class MidiToAsciiConverter 
 {
-	private static String MIDI_LOC = "/Users/vvvemuri1/Desktop/hw2Workspace/MidiToAscii/src/573.midi";
+	private static String MIDI_LOC = "/Users/vvvemuri1/git/MidiToAscii/MidiToAscii/src/573.midi";
 	
 	public static void main(String []args) throws InvalidMidiDataException, IOException, MidiUnavailableException
 	{
 		File midiFile = new File(MIDI_LOC);
 		Player player = new Player();
 		Pattern pattern = (Pattern) player.loadMidi(midiFile);
+		System.out.println(pattern);
+		System.out.println(pattern.getMusicString());
+		System.out.println(pattern.getProperties());
+		DurationPatternTool durationPatternTool = new DurationPatternTool();
+
+		
+		/*Token[] tokens = pattern.getTokens();
+		for (int i = 0; i < tokens.length; i++)
+		{
+			System.out.println();
+		}*/
+		
 		Sequence sequence = player.getSequence(pattern);
-		Track[] tracks = sequence.getTracks();
+		System.out.println(sequence);
+		
+		/*DurationPatternTool durationPatternTool = new DurationPatternTool();*/
+		
+		MidiParser parser = new MidiParser();
+		parser.addParserListener(durationPatternTool);
+		parser.parse(sequence);
+		
+		System.out.println("Duration: " + durationPatternTool.getDuration());
+		
+		/*Track[] tracks = sequence.getTracks();
 		
 		for (int i = 0; i < tracks.length; i++)
 		{
@@ -37,11 +60,11 @@ public class MidiToAsciiConverter
 				int sizeBytes = message.getLength();
 				for (int k = 0; k < sizeBytes; k++)
 				{
-					System.out.print((int)(message.getMessage()[k]));
+					//System.out.print((int)(message.getMessage()[k]));
 				}
 				
 				System.out.println();
 			}			
-		}
+		}*/
 	}
 }
