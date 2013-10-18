@@ -8,5 +8,10 @@ public class MidiToAsciiConverter
 	{
 		ScoreListener listener = new ScoreListener("573");
 		System.out.println("Total Duration: " + listener.getTotalDuration());
+		System.out.println();
+		
+		ScoreListener listener2 = new ScoreListener("575");
+		System.out.println("Total Duration: " + listener2.getTotalDuration());
+
 	}
 }
