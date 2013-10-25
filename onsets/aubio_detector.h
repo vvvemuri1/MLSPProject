@@ -7,12 +7,13 @@
 
 class AubioDetector : public Detector {
   public:
-    AubioDetector();
+    AubioDetector(bool output);
     ~AubioDetector();
     virtual std::vector<std::vector<int> > Process(std::vector<std::string> files);
 
   private:
     aubio_onset_t* onset;
+    bool show_output;
 };
 
 #endif

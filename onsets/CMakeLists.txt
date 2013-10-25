@@ -11,7 +11,7 @@ configure_file(
 
 include_directories("${PROJECT_BINARY_DIR}")
 
-add_executable(onsets main.cpp aubio_detector.cpp)
+add_executable(onsets main.cpp aubio_detector.cpp graph_writer.cpp)
 
 target_link_libraries(onsets aubio)
 

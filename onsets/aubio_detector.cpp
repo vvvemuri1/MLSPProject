@@ -10,8 +10,9 @@ using std::vector;
 
 // TODO: consolidate constants.
 
-AubioDetector::AubioDetector() {
+AubioDetector::AubioDetector(bool output) {
   onset = new_aubio_onset((char_t*)"default", 512, 256, 44100);
+  show_output = output;
 }
 
 AubioDetector::~AubioDetector() {
@@ -32,7 +33,9 @@ vector<vector<int> > AubioDetector::Process(vector<string> files) {
     }
 
     uint_t frames = aubio_source_get_frames(file);
-    cout << "Processing file '" << files[i] << "' with " << frames << " samples" << endl;
+    if (show_output) {
+      cout << "Processing file '" << files[i] << "' with " << frames << " samples" << endl;
+    }
 
     uint_t read_counter = 0;
     int current_frame = 0;
@@ -42,15 +45,17 @@ vector<vector<int> > AubioDetector::Process(vector<string> files) {
       aubio_onset_do(onset, input, output);
 
       if (fvec_read_sample(output, 0)) {
-        onsets[i].push_back(aubio_onset_get_last_s(onset));
+        onsets[i].push_back(current_frame);
       }
 
-      current_frame++;
+      current_frame += read_counter;
     } while (read_counter == overlap_size);
 
     del_aubio_source(file);
 
-    cout << onsets[i].size() << " onsets found!" << endl;
+    if (show_output) {
+      cout << onsets[i].size() << " onsets found!" << endl;
+    }
   }
 
   del_fvec(input);
