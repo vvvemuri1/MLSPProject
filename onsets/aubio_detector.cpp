@@ -12,6 +12,7 @@ using std::vector;
 
 AubioDetector::AubioDetector(bool output) {
   onset = new_aubio_onset((char_t*)"default", 512, 256, 44100);
+  aubio_onset_set_threshold(onset, 0.1);
   show_output = output;
 }
 
