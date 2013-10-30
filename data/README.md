@@ -16,6 +16,11 @@ This will create a plot with the wave form, and red lines representing the appro
 
     folk/Edward.onsets
 
+Generating Approximate Onsets
+================
+
+If there are missing approximate onset data, or if changes have been made to the c++ program to approximate the onsets, running the 'find_onsets.py' script will generate the .wav.out files for all training data.
+
 TODO
 ================
 
