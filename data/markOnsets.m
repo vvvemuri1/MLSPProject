@@ -19,11 +19,11 @@ ax = gca;
 
 while button ~= 'q'             % q to quit
     [x y button] = ginput(1);
-    X = [X x];
     zoomfactor = 1;
     
     if(button ==1)
         plot([x x], [-1, 1], 'color', 'g');
+        X = [X x];   
     else
         if(button == 'z')       % z to zoom in
             zoomfactor = 1.5;
