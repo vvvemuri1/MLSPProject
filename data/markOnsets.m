@@ -11,10 +11,35 @@ figure; hold on;
 plot(wav, 'blue');
 plot(onsets, 'red');
 
-[x ~] = ginput;
+X = [];
+button = 1;
+h = zoom;
+set(h, 'Motion', 'Horizontal');
+ax = gca;
 
-output_file = fopen(strcat(filename, '.onsets'), 'w');
-fprintf(output_file, '%d\n', x);
-fclose(output_file);
-
+while button ~= 'q'             % q to quit
+    [x y button] = ginput(1);
+    X = [X x];
+    zoomfactor = 1;
+    
+    if(button ==1)
+        plot([x x], [-1, 1], 'color', 'g');
+    else
+        if(button == 'z')       % z to zoom in
+            zoomfactor = 1.5;
+        elseif(button == 'x')   % x to zoom out
+            zoomfactor = 0.5;
+        end
+        zoom(zoomfactor);
+        cax = axis(ax);
+        daxX = (cax(2)-cax(1))/zoomfactor/2;
+        % daxY = (cax(4)-cax(3))/zoomfactor/2;
+        daxY = (cax(4) - cax(3))/2;
+        axis(ax,[x+[-1 1]*daxX y+[-1 1]*daxY]);
+    end
+    
+    output_file = fopen(strcat(filename, '.onsets'), 'w');
+    fprintf(output_file, '%d\n', X);
+    fclose(output_file);
+    
 end
