@@ -16,6 +16,8 @@ This will create a plot with the wave form, and red lines representing the appro
 
     folk/Edward.onsets
 
+When marking the osnets, remember to mark the rests as well.
+
 Generating Approximate Onsets
 ================
 
