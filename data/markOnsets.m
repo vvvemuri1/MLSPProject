@@ -23,7 +23,7 @@ while button ~= 'q'             % q to quit
     
     if(button ==1)
         plot([x x], [-1, 1], 'color', 'g');
-        X = [X x];   
+        X = [X x];
     else
         if(button == 'z')       % z to zoom in
             zoomfactor = 1.5;
@@ -38,8 +38,9 @@ while button ~= 'q'             % q to quit
         axis(ax,[x+[-1 1]*daxX y+[-1 1]*daxY]);
     end
     
-    output_file = fopen(strcat(filename, '.onsets'), 'w');
-    fprintf(output_file, '%d\n', X);
-    fclose(output_file);
-    
 end
+output_file = fopen(strcat(filename, '.onsets'), 'w');
+X = sort(X);
+fprintf(output_file, '%d\n', X);
+fclose(output_file);
+
