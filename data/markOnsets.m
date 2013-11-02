@@ -24,6 +24,9 @@ while button ~= 'q'             % q to quit
     if(button ==1)
         plot([x x], [-1, 1], 'color', 'g');
         X = [X x];
+    elseif(button == 'r')       % r to undo
+        plot([X(:, end) X(:, end)], [-1, 1], 'color', 'w');
+        X(:, end) = [];
     else
         if(button == 'z')       % z to zoom in
             zoomfactor = 1.5;
