@@ -12,7 +12,7 @@ To run the Matlab script to mark the actual onsets, run the function markOnsets.
 
     markOnsets('folk', 'Edward');
 
-This will create a plot with the wave form, and red lines representing the approximated onsets.  Simply click where the actual onsets are (the X-position is the only position tracked, the Y-position does not matter), hit 'z' on the keyboard to zoom in, and 'x' to zoom out.  When all onsets have been clicked, hit the 'q' key to complete.  This will create a new file which, for our example above, will be:
+This will create a plot with the wave form, and red lines representing the approximated onsets.  Simply click where the actual onsets are (the X-position is the only position tracked, the Y-position does not matter), hit 'z' on the keyboard to zoom in, 'x' to zoom out, and 'r' to undo.  When all onsets have been clicked, hit the 'q' key to complete.  This will create a new file which, for our example above, will be:
 
     folk/Edward.onsets
 
