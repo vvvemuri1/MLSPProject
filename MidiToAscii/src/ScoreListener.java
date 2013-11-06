@@ -1,8 +1,12 @@
 import java.io.File;
+import java.io.PrintWriter;
+import java.text.DecimalFormat;
 import java.util.Iterator;
 import java.util.Vector;
+
 import javax.sound.midi.MidiSystem;
 import javax.sound.midi.Sequence;
+
 import org.jfugue.ChannelPressure;
 import org.jfugue.Controller;
 import org.jfugue.Instrument;
@@ -33,57 +37,68 @@ public class ScoreListener implements ParserListener
 	private int tempo;
 	
 	private long totalDuration = 0;
+	private PrintWriter writer;
 	
-	public ScoreListener(String name)
+	public ScoreListener(String name, PrintWriter writer)
 	{
         this.name = name;
+        this.writer = writer;
         parseMidi();
 	}
 	
 	@Override
 	public void channelPressureEvent(ChannelPressure arg0) 
 	{
-        System.out.println("pressure");		
 	}
 
 	@Override
 	public void controllerEvent(Controller arg0) 
 	{
-        System.out.println("controller");
 	}
 
 	@Override
 	public void instrumentEvent(Instrument arg0) 
 	{
-        System.out.println("instr");
 	}
 
 	@Override
 	public void keySignatureEvent(KeySignature arg0) 
 	{
-        System.out.println("key");
 	}
 
 	@Override
 	public void layerEvent(Layer arg0) 
 	{
-        System.out.println("layer");
 	}
 
 	@Override
 	public void measureEvent(Measure arg0) 
 	{
-        System.out.println("measure");
 	}
 
+	@Override
+	public void pitchBendEvent(PitchBend arg0) 
+	{
+	
+	}
+
+	@Override
+	public void polyphonicPressureEvent(PolyphonicPressure arg0) 
+	{
+
+	}
+	
 	@Override
 	public void noteEvent(Note note) 
 	{
 		if (note.getDuration() != 0)
 		{
-	        System.out.println(Note.getStringForNote(note.getValue()) + " " 
-	        		+ note.getDuration());
 	        totalDuration += note.getDuration();
+	        DecimalFormat formatter = new DecimalFormat("0.###");
+	        String value = formatter.format(totalDuration);
+	        
+	        writer.println("0." + value + " 125 " + 
+	        		Note.getStringForNote(note.getValue()));
 		}
 	}
 
@@ -91,26 +106,12 @@ public class ScoreListener implements ParserListener
 	public void parallelNoteEvent(Note note) 
 	{
         noteEvent(note);
-        System.out.println("parallel");
-	}
-
-	@Override
-	public void pitchBendEvent(PitchBend arg0) 
-	{
-        System.out.println("bend");
-	}
-
-	@Override
-	public void polyphonicPressureEvent(PolyphonicPressure arg0) 
-	{
-        System.out.println("poly");
 	}
 
 	@Override
 	public void sequentialNoteEvent(Note note) 
 	{
         noteEvent(note);
-        System.out.println("sequential");
 	}
 
 	@Override
@@ -141,8 +142,10 @@ public class ScoreListener implements ParserListener
         try 
         {
             //Allow for alternate file extensions of midi files.
-            File midiFile = new File("/Users/vvvemuri1/git/MidiToAscii/MidiToAscii/src/" + name + ".midi");
-            File altFile = new File("/Users/vvvemuri1/git/MidiToAscii/MidiToAscii/src/" + name + ".mid");
+            File midiFile = new File("/Users/vvvemuri1/git/MidiToAscii/MidiToAscii/src/" 
+            		+ name + ".midi");
+            File altFile = new File("/Users/vvvemuri1/git/MidiToAscii/MidiToAscii/src/" 
+            		+ name + ".mid");
 
             if (!midiFile.exists() && altFile.exists()) {
                 midiFile = altFile;
