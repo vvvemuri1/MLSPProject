@@ -97,8 +97,7 @@ public class ScoreListener implements ParserListener
 	        DecimalFormat formatter = new DecimalFormat("0.###");
 	        String value = formatter.format(totalDuration);
 	        
-	        writer.println("0." + value + " 125 " + 
-	        		Note.getStringForNote(note.getValue()));
+	        writer.println(Note.getStringForNote(note.getValue()));
 		}
 	}
 
