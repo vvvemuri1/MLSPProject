@@ -11,7 +11,7 @@ G5
 F5
 G5
 A5
-R
+PAU
 F5
 A5
 C6
@@ -34,7 +34,7 @@ F5
 D5
 C5
 F5
-R
+PAU
 G5
 G5
 G5
@@ -44,7 +44,7 @@ A5
 G5
 A5
 F5
-R
+PAU
 A5
 A5
 G5
@@ -52,7 +52,7 @@ F5
 D5
 C5
 F5
-R
+PAU
 F5
 A5
 A5

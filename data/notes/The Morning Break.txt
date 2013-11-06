@@ -10,7 +10,7 @@ C5
 E5
 A5
 A5
-R
+PAU
 G5
 C6
 D6
@@ -22,7 +22,7 @@ B5
 A5
 G5
 C6
-R
+PAU
 G5
 C6
 D6
@@ -45,4 +45,4 @@ C5
 E5
 A5
 A5
-R
+PAU

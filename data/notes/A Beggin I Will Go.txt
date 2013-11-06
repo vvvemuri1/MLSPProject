@@ -13,7 +13,7 @@ D5
 G5
 G5
 E5
-R
+PAU
 A5
 A5
 A5
@@ -28,7 +28,7 @@ D5
 C5
 A4
 G4
-R
+PAU
 B4
 C5
 D5
@@ -36,7 +36,7 @@ D5
 D5
 E5
 D5
-R
+PAU
 D5
 D5
 D5
@@ -44,4 +44,4 @@ C5
 A4
 G4
 A4
-R
+PAU
