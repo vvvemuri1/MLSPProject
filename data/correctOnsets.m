@@ -1,9 +1,7 @@
 function correctOnsets(style, name)
 filename = strcat(style, '/', name);
 
-% onsets_file = fopen(strcat(filename, '.wav.out'));
 onsets_file = fopen(strcat(filename, '.onsets'));
-% onsets = fscanf(onsets_file, '%d', [1 inf]);
 onsets = load(strcat(filename, '.onsets'));
 fclose(onsets_file);
 
