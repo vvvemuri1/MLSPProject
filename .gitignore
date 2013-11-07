@@ -1,0 +1,7 @@
+*.asv
+CMakeCache.txt
+CMakeFiles/
+Makefile
+cmake_install.cmake
+onsets/config.h
+.DS_Store
