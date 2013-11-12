@@ -16,8 +16,8 @@ fclose(notes_file);
 
 % convert sample to second
 onsets = onsets./fs;
-notes(1) = [];
-notes = [notes; {'Ssil'}];
+notes(1) = {'Ssil'};
+% notes = [notes];
 
 output_dir = fullfile('lab', style);
 
