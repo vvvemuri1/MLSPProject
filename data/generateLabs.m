@@ -6,6 +6,9 @@ onsets = load(strcat(filename, '.onsets'));
 
 % load notes file
 notes_file = fopen(fullfile('notes', strcat(name, '.txt')));
+if(notes_file == -1)
+    disp(fullfile('notes', strcat(name, '.txt')));
+end
 notes = fgetl(notes_file);
 while (~feof(notes_file))
     notes = [notes; {fgetl(notes_file)}];
@@ -16,7 +19,7 @@ fclose(notes_file);
 
 % convert sample to second
 onsets = onsets./fs;
-notes(1) = {'Ssil'};
+% notes(1) = {'Ssil'};
 % notes = [notes];
 
 output_dir = fullfile('lab', style);
@@ -25,8 +28,16 @@ if(~exist(output_dir, 'dir'))
     mkdir(output_dir);
 end
 
-output_file = fopen(fullfile(output_dir, strcat(name, '.lab')), 'w');
+output_file = fopen(fullfile(output_dir, strcat(regexprep(name,'[^\w'']',''), '.lab')), 'w');
 for i = 1 : length(onsets)
+    if(i == 1)
+        notes{i} = 'Ssil';
+    elseif(strcmp(notes{i}, 'PAU'))
+        notes{i} = 'pau';
+    else
+        notes{i} = strrep(notes{i}, '#', 's');
+        notes{i} = strcat(notes{i}, 'N');
+    end
     fprintf(output_file, '%f 125 %s\n', onsets(i), notes{i});
 end
 fclose(output_file);
