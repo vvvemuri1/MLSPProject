@@ -29,6 +29,10 @@ if(~exist(output_dir, 'dir'))
 end
 
 output_file = fopen(fullfile(output_dir, strcat(regexprep(name,'[^\w'']',''), '.lab')), 'w');
+fprintf(output_file, '#\n');
+if(isempty(onsets))
+    fprintf(name);
+end
 for i = 1 : length(onsets)
     if(i == 1)
         notes{i} = 'Ssil';
