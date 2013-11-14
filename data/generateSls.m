@@ -1,4 +1,4 @@
-function generateLabs(style, name)
+function generateSls(style, name)
 filename = fullfile(style, name);
 
 % load onsets file
@@ -19,8 +19,10 @@ fclose(notes_file);
 
 % convert sample to second
 onsets = onsets./fs;
+% notes(1) = {'Ssil'};
+% notes = [notes];
 
-output_dir = fullfile('lab', style);
+output_dir = fullfile('sl', style);
 
 if(~exist(output_dir, 'dir'))
     mkdir(output_dir);
@@ -41,6 +43,13 @@ for i = 1 : length(onsets)
         notes{i} = strrep(notes{i}, '#', 's');
         notes{i} = strcat(notes{i}, 'N');
     end
-    fprintf(output_file, '%f 125 %s\n', onsets(i), notes{i});   
+   
+    for j = 1 : 3    
+        if(i == 1)
+            fprintf(output_file, '%f 125 %d %s\n', j*onsets(i)/3, j, notes{i});
+        else
+            fprintf(output_file, '%f 125 %d %s\n', onsets(i-1) + j*(onsets(i)-onsets(i-1))/3, j, notes{i});
+        end
+    end
 end
 fclose(output_file);
