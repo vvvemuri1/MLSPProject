@@ -15,8 +15,8 @@ while (~feof(notes_file))
 end
 fclose(notes_file);
 
-[~, fs] = wavread(strcat(filename, '.wav'));
-
+[wav, fs] = wavread(strcat(filename, '.wav'));
+onsets = [onsets;length(wav)];
 % convert sample to second
 onsets = onsets./fs;
 % notes(1) = {'Ssil'};
@@ -28,7 +28,7 @@ if(~exist(output_dir, 'dir'))
     mkdir(output_dir);
 end
 
-output_file = fopen(fullfile(output_dir, strcat(regexprep(name,'[^\w'']',''), '.lab')), 'w');
+output_file = fopen(fullfile(output_dir, strcat(strrep(regexprep(name,'[^\w'']',''), '''', ''), '.sl')), 'w');
 fprintf(output_file, '#\n');
 if(isempty(onsets))
     fprintf(name);
@@ -37,7 +37,7 @@ end
 for i = 1 : length(onsets)
     if(i == 1)
         notes{i} = 'ssil';
-    elseif(strcmp(notes{i}, 'PAU'))
+    elseif(i == length(onsets) || strcmp(notes{i}, 'PAU'))
         notes{i} = 'pau';
     else
         notes{i} = strrep(notes{i}, '#', 's');
