@@ -4,5 +4,7 @@ cmake .
 make
 ./onsets <list of audio files>
 
-This depends on aubio >= 4.0.
+This depends on:
+aubio >= 4.0
+tclap >= 1.2.1
 
